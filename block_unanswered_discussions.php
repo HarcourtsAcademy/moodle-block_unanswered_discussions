@@ -34,7 +34,7 @@ class block_unanswered_discussions extends block_base {
         'oldestposts' => 2, // Oldest Unanswered Posts
         'yourposts'   => 2  // Your Unanswered Posts
     );
-    public $maxsubjectlength = 40; // characters
+    public $maxsubjectlength = 60; // characters
     public $maxshowoption = 10; // messages
     public $querylimit = 50; // messages
 
@@ -247,7 +247,7 @@ class block_unanswered_discussions extends block_base {
                     .  $OUTPUT->container_start('block_unanswered_discussions_message')
                     .  $OUTPUT->action_link('/mod/forum/discuss.php?d='.$discussion->id, $discussion->subject)
                     .  $OUTPUT->container_end()
-                    .  $OUTPUT->container(timeAgo((int)usertime(time()), (int)usertime($discussion->timemodified)) .
+                    .  $OUTPUT->container(timeAgo((int)usertime(time()), (int)usertime($discussion->timemodified)) . 
                             ' by ' . $discussion->firstname . ' ' . $discussion->lastname, 'block_unanswered_discussions_date')
                     .  $OUTPUT->container_end();
             }
