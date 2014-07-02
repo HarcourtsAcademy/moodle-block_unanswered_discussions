@@ -24,6 +24,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+require_once($CFG->dirroot.'/blocks/unanswered_discussions/locallib.php');
+
 class block_unanswered_discussions extends block_base {
 
     // Default Configuration
@@ -244,7 +246,7 @@ class block_unanswered_discussions extends block_base {
                     .  $OUTPUT->container_start('block_unanswered_discussions_message')
                     .  $OUTPUT->action_link('/mod/forum/discuss.php?d='.$discussion->id, $discussion->subject)
                     .  $OUTPUT->container_end()
-                    .  $OUTPUT->container(userdate($discussion->timemodified, $strftimedatetime), 'block_unanswered_discussions_date')
+                    .  $OUTPUT->container(timeAgo((int)usertime(time()), (int)usertime($discussion->timemodified)), 'block_unanswered_discussions_date')
                     .  $OUTPUT->container_end();
             }
 
