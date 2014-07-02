@@ -24,6 +24,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+function daysdiff($date1, $date2) {
+  return round(abs($date1 - $date2) / (60 * 60 * 24));
+}
+
 /*
  * This function prints the difference between two php datetime objects
  * in a more human readable form

@@ -242,13 +242,23 @@ class block_unanswered_discussions extends block_base {
                     $discussion->subject = substr($discussion->subject, 0, $this->maxsubjectlength).'...';
                 }
 
+                $daysdiff = daysdiff(usertime(time()), usertime($discussion->timemodified));
+                error_log("now: " . usertime(time()) . " time modified: " . usertime($discussion->timemodified));
+                error_log("days diff: $daysdiff");
+                $dateclass = '';
+                if ( 3 < $daysdiff and $daysdiff < 5 ) {
+                    $dateclass = ' alert alert-warning';
+                } else if ($daysdiff > 5) {
+                    $dateclass = ' alert alert-error';
+                }
+
                 $this->content->text
                     .= $OUTPUT->container_start('block_unanswered_discussions_item')
                     .  $OUTPUT->container_start('block_unanswered_discussions_message')
                     .  $OUTPUT->action_link('/mod/forum/discuss.php?d='.$discussion->id, $discussion->subject)
                     .  $OUTPUT->container_end()
-                    .  $OUTPUT->container(timeAgo((int)usertime(time()), (int)usertime($discussion->timemodified)) . 
-                            ' by ' . $discussion->firstname . ' ' . $discussion->lastname, 'block_unanswered_discussions_date')
+                    .  $OUTPUT->container(timeAgo((int)usertime(time()), (int)usertime($discussion->timemodified)), 'block_unanswered_discussions_date' . $dateclass)
+                    .  $OUTPUT->container('by ' . $discussion->firstname . ' ' . $discussion->lastname, 'block_unanswered_discussions_author')
                     .  $OUTPUT->container_end();
             }
 
