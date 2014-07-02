@@ -133,12 +133,13 @@ class block_unanswered_discussions extends block_base {
             $where_post_exclude_sql = (!empty($discussion_exclude) ? 'AND d.id NOT IN(' . join($discussion_exclude, ',') . ')' : '');
 
             // Building up the SQL statement from the bits and pieces above
-            $sql = "SELECT d.id, d.forum, d.name, d.timemodified, d.groupid, (COUNT(p.id) - 1) AS replies
-                    FROM {forum_posts} p, {forum_discussions} d
+            $sql = "SELECT d.id, d.forum, d.name, d.timemodified, d.groupid, (COUNT(p.id) - 1) AS replies, u.firstname, u.lastname
+                    FROM {forum_posts} p, {forum_discussions} d, {user} u
                     WHERE d.course = $course
                           $where_fora_exclude_sql
                           $where_post_exclude_sql
                           AND d.id = p.discussion
+                          AND u.id = d.userid
                           {$queries['where'][$i]}
                     GROUP BY d.id, d.forum, d.name, d.timemodified, d.groupid
                     HAVING COUNT(p.id) = 1
@@ -246,7 +247,8 @@ class block_unanswered_discussions extends block_base {
                     .  $OUTPUT->container_start('block_unanswered_discussions_message')
                     .  $OUTPUT->action_link('/mod/forum/discuss.php?d='.$discussion->id, $discussion->subject)
                     .  $OUTPUT->container_end()
-                    .  $OUTPUT->container(timeAgo((int)usertime(time()), (int)usertime($discussion->timemodified)), 'block_unanswered_discussions_date')
+                    .  $OUTPUT->container(timeAgo((int)usertime(time()), (int)usertime($discussion->timemodified)) .
+                            ' by ' . $discussion->firstname . ' ' . $discussion->lastname, 'block_unanswered_discussions_date')
                     .  $OUTPUT->container_end();
             }
 
