@@ -53,3 +53,11 @@ $string['unanswereddiscussions'] = 'Unanswered Discussions';
 $string['unanswered_discussions:addinstance'] = 'Add a new Unanswered Discussions block';
 $string['yourposts'] = 'Your Discussions';
 $string['yourpostsconfig'] = 'User\'s Discussions';
+
+$string['past_day'] = 'yesterday';
+$string['past_days'] = '{$a} days ago';
+$string['past_hours'] = '{$a} hours ago';
+$string['past_hour'] = 'last hour';
+$string['past_minutes'] = '{$a} minutes ago';
+$string['past_minute'] = 'last minute';
+$string['past_now'] = 'just now';

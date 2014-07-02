@@ -35,7 +35,7 @@ function timeAgo($now,$otherDate=null,$offset=null){
 		$offset = $now - $otherDate;
 	}
     if ($offset == 0) {
-        return get_string('past_now', 'block_forum_aggregator');
+        return get_string('past_now', 'block_unanswered_discussions');
     }
 	if ($offset != null) {
 		$deltaS = $offset%60;
@@ -49,25 +49,25 @@ function timeAgo($now,$otherDate=null,$offset=null){
 		throw new Exception("Must supply otherdate or offset (from now)");
 	}
 	if ($deltaD > 1) {
-		return get_string('past_days', 'block_forum_aggregator', $deltaD);
+		return get_string('past_days', 'block_unanswered_discussions', $deltaD);
 	}
 	if (date('z', $otherDate) < date('z', $now) || $deltaD == 1) {
-		return get_string('past_day', 'block_forum_aggregator');
+		return get_string('past_day', 'block_unanswered_discussions');
 	}
 	if ($deltaH == 1) {
-		return get_string('past_hour', 'block_forum_aggregator');
+		return get_string('past_hour', 'block_unanswered_discussions');
 	}
 	if ($deltaM == 1) {
-		return get_string('past_minute', 'block_forum_aggregator');;
+		return get_string('past_minute', 'block_unanswered_discussions');;
 	}
 	if ($deltaH > 0) {
-		return get_string('past_hours', 'block_forum_aggregator', $deltaH);
+		return get_string('past_hours', 'block_unanswered_discussions', $deltaH);
 	}
 	if ($deltaM > 0) {
-		return get_string('past_minutes', 'block_forum_aggregator', $deltaM);
+		return get_string('past_minutes', 'block_unanswered_discussions', $deltaM);
 	}
 	else {
-		return get_string('past_now', 'block_forum_aggregator');
+		return get_string('past_now', 'block_unanswered_discussions');
 	}
 }
 
