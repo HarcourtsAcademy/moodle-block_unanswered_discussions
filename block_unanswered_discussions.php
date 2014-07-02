@@ -32,7 +32,7 @@ class block_unanswered_discussions extends block_base {
         'oldestposts' => 2, // Oldest Unanswered Posts
         'yourposts'   => 2  // Your Unanswered Posts
     );
-    public $maxsubjectlength = 20; // characters
+    public $maxsubjectlength = 40; // characters
     public $maxshowoption = 10; // messages
     public $querylimit = 50; // messages
 
@@ -226,7 +226,7 @@ class block_unanswered_discussions extends block_base {
             }
 
             // Add the title for this section
-            $this->content->text .= $OUTPUT->container ($strtitle[$key], 'block_unanswered_discussions_heading');
+            $this->content->text .= $OUTPUT->heading ($strtitle[$key], '4', 'block_unanswered_discussions_heading');
 
             // Make sure we get them all by resetting the array pointer
             reset($set);
