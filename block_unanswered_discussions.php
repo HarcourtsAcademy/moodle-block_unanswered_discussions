@@ -244,7 +244,7 @@ class block_unanswered_discussions extends block_base {
 
                 $daysdiff = daysdiff(usertime(time()), usertime($discussion->timemodified));
                 $dateclass = '';
-                if ( 3 < $daysdiff and $daysdiff < 5 ) {
+                if ( 3 < $daysdiff and $daysdiff <= 5 ) {
                     $dateclass = ' alert alert-warning';
                 } else if ($daysdiff > 5) {
                     $dateclass = ' alert alert-error';
