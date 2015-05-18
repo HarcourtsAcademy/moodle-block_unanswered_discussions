@@ -156,8 +156,8 @@ class block_unanswered_discussions extends block_base {
 
             // Filter forums that are not visible or should appear to users in groupings
             foreach ($this->discussions[$i] as $key => $discussion) {
-                $coursemodule = get_coursemodule_from_instance('forum', $discussion->forum, $course);
-                if (!$coursemodule->visible || !groups_course_module_visible($coursemodule, $USER->id)) {
+                $cm_info = get_fast_modinfo($course, $USER->id)->instances['forum'][$discussion->forum];
+                if (!$cm_info->visible) {
                     unset($this->discussions[$i][$key]);
                 }
             }
